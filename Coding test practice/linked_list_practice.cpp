@@ -17,6 +17,26 @@ public:
     void reverse_list();
     void show_all();
 };
+int main(){
+    string input;
+    LinkedList my_list;
+    for (int i=0;i<5;i++) {
+        cout << "# "<<i+1<<"/5"<<" What is your favorite color: ";
+        cin >> input;
+        my_list.add_to_tail(input);
+    }
+    cout << "Show list after input\n";
+    my_list.show_all();
+    cout << "Remove color name:";
+    cin >> input;
+    my_list.remove_node(input);
+    cout << "Show list after remove\n";
+    my_list.show_all();
+    my_list.reverse_list();
+    cout << "Show list after inverse\n";
+    my_list.show_all();
+    return 0;
+}
 void LinkedList::add_to_head(string new_name) {
     node* tmp = new node;
     tmp->name = new_name;
@@ -71,25 +91,4 @@ void LinkedList::show_all() {
     for (node* p = head;p!=NULL;p=p->link) {
         cout << p->name << '\n';
     }
-}
-
-int main(){
-    string input;
-    LinkedList my_list;
-    for (int i=0;i<5;i++) {
-        cout << "# "<<i+1<<"/5"<<" What is your favorite color: ";
-        cin >> input;
-        my_list.add_to_tail(input);
-    }
-    cout << "Show list after input\n";
-    my_list.show_all();
-    cout << "Remove color name:";
-    cin >> input;
-    my_list.remove_node(input);
-    cout << "Show list after remove\n";
-    my_list.show_all();
-    my_list.reverse_list();
-    cout << "Show list after inverse\n";
-    my_list.show_all();
-    return 0;
 }
