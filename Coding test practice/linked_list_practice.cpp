@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#define LIST_SIZE 6
 using namespace std;
 class node {
 public:
@@ -16,25 +17,48 @@ public:
     void remove_node(string target);
     void reverse_list();
     void show_all();
+    string get_middle_node();
 };
 int main(){
-    string input;
     LinkedList my_list;
-    for (int i=0;i<5;i++) {
-        cout << "# "<<i+1<<"/5"<<" What is your favorite color: ";
+
+    // Input -> Add tail
+    string input;
+    for (int i=0;i<LIST_SIZE;i++) {
+        cout << "# "<<i+1<<"/"<<LIST_SIZE<<" Add tail to Linked List: ";
         cin >> input;
         my_list.add_to_tail(input);
     }
+
+    /* Input -> Add head Example
+    for (int i=0;i<LIST_SIZE;i++) {
+        cout << "# "<<i+1<<"/"<<LIST_SIZE<<" Add head to Linked List: ";
+        cin >> input;
+        my_list.add_to_head(input);
+    }
+    */
+
+    // Print All name in List after input
     cout << "Show list after input\n";
     my_list.show_all();
+
+    /* Remove Example
     cout << "Remove color name:";
     cin >> input;
     my_list.remove_node(input);
     cout << "Show list after remove\n";
     my_list.show_all();
+    */
+
+    /* Reverse Example
     my_list.reverse_list();
     cout << "Show list after inverse\n";
     my_list.show_all();
+    */
+
+    // Print middle node
+    cout << "middle node: " << my_list.get_middle_node();
+
     return 0;
 }
 void LinkedList::add_to_head(string new_name) {
@@ -91,4 +115,15 @@ void LinkedList::show_all() {
     for (node* p = head;p!=NULL;p=p->link) {
         cout << p->name << '\n';
     }
+}
+
+string LinkedList::get_middle_node() {
+    if (head==NULL) return "Empty";
+    node* fast = head;
+    node* slow = head;
+    while (fast!=NULL&&fast->link!=NULL) {
+        fast = fast->link->link;
+        slow = slow->link;
+    }
+    return slow->name;
 }
